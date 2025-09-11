@@ -1,0 +1,29 @@
+<div class="search-container card shadow-lg border-0">
+  <div class="card-body p-4">
+    <form>
+      <div class="row g-3 align-items-center">
+        <div class="col-md-3">
+          <label for="propertyType" class="form-label visually-hidden">Tipo</label>
+          <select class="form-select form-select-lg" id="propertyType">
+            <option selected disabled>Tipo</option>
+            <option value="venta">Venta</option>
+            <option value="renta">Renta</option>
+            <option value="ambos">Ambos</option>
+          </select>
+        </div>
+
+        <div class="col-md-9">
+          <label for="searchQuery" class="form-label visually-hidden">Buscar</label>
+          <div class="input-group">
+            <input type="text" 
+                   class="form-control form-control-lg" 
+                   id="searchQuery" 
+                   placeholder="Busca por ciudad, barrio o dirección...">
+            <button class="btn btn-primary btn-lg" type="submit">
+              <i class="bi bi-search"></i> <span class="d-none d-sm-inline ms-2">Buscar</span> </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

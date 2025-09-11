@@ -1,0 +1,13 @@
+.search-container {
+  // Un borde redondeado más pronunciado para un look más moderno.
+  border-radius: 0.75rem;
+
+  // Opcional: añade un toque de color o un degradado sutil al fondo.
+  // background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+}
+
+
+.input-group > .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

@@ -1,0 +1,66 @@
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+  <div class="card shadow-lg border-0 register-card">
+    <div class="card-body p-4 p-md-5">
+      <h2 class="card-title text-center mb-4">Crear una cuenta</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        
+        <div class="mb-3">
+          <label for="username" class="form-label">Nombre de usuario</label>
+          <input type="text" class="form-control" id="username" formControlName="username" 
+                 [class.is-invalid]="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+          <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.errors" class="invalid-feedback">
+            <div *ngIf="registerForm.get('username')?.errors?.['required']">El nombre es requerido.</div>
+            <div *ngIf="registerForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" formControlName="email"
+                 [class.is-invalid]="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors" class="invalid-feedback">
+            <div *ngIf="registerForm.get('email')?.errors?.['required']">El correo es requerido.</div>
+            <div *ngIf="registerForm.get('email')?.errors?.['email']">Ingresa un correo válido.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" formControlName="password"
+                 [class.is-invalid]="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors" class="invalid-feedback">
+            <div *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es requerida.</div>
+            <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Debe tener al menos 6 caracteres.</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="phone" class="form-label">Teléfono</label>
+          <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="+573001234567"
+                 [class.is-invalid]="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+          <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.errors" class="invalid-feedback">
+            <div *ngIf="registerForm.get('phone')?.errors?.['required']">El teléfono es requerido.</div>
+            <div *ngIf="registerForm.get('phone')?.errors?.['pattern']">Ingresa un número de teléfono válido.</div>
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Registrarme</span>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="isLoading"> Cargando...</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="text-center mt-4">
+        <small>¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión aquí</a></small>
+      </div>
+    </div>
+  </div>
+</div>
