@@ -11,3 +11,22 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.background-img {
+  position: absolute;
+  top: -7;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1; // Asegura que la imagen esté detrás del contenido
+  opacity: 0.80; // Ajusta la opacidad para que el texto sea legible
+}
+
+.search-container{
+  position: relative;
+  z-index: 1; // Asegura que el contenido del formulario esté por encima de la imagen de fondo
+}
+
+.card-body{
+  margin-top: 10%;
+}

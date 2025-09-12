@@ -16,8 +16,6 @@ export class RegisterComponent {
   registerForm: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
-
-  // Inyectamos los servicios que necesitamos
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private router = inject(Router);
@@ -33,7 +31,6 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.invalid) {
-      // Marcar todos los campos como "tocados" para mostrar errores
       this.registerForm.markAllAsTouched();
       return;
     }
@@ -41,15 +38,14 @@ export class RegisterComponent {
     this.isLoading = true;
     this.errorMessage = null;
 
-    const endpoint = 'https://tu-api.com/auth/register'; // <-- CAMBIA ESTO POR TU ENDPOINT REAL
+    const endpoint = 'http://api/core-service/v1/auth/register';
     const body = this.registerForm.value;
 
     this.http.post(endpoint, body).pipe(
-      finalize(() => this.isLoading = false) // Se ejecuta al final, haya éxito o error
+      finalize(() => this.isLoading = false)
     ).subscribe({
       next: (response) => {
         console.log('Registro exitoso:', response);
-        // Redirigir al usuario al login después de un registro exitoso
         this.router.navigate(['/login']);
       },
       error: (err) => {

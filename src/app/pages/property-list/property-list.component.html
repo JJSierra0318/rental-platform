@@ -1,0 +1,9 @@
+<div class="container py-5">
+  <h1 class="mb-4">Propiedades Disponibles</h1>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div *ngFor="let prop of properties" class="col">
+      <app-property-card [property]="prop"></app-property-card>
+    </div>
+  </div>
+</div>
