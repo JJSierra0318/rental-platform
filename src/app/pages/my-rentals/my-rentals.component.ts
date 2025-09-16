@@ -31,4 +31,8 @@ export class MyRentalsComponent implements OnInit {
       }
     });
   }
+
+  createPayment(){
+    alert('Pago generado exitosamente');
+  }
 }
