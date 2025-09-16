@@ -69,4 +69,27 @@ export class PropertyDetailComponent implements OnInit {
       });
     }
   }
+
+    deleteProperty(): void {
+    if (!this.property) return;
+
+    // 1. Pide confirmación al usuario
+    const isConfirmed = confirm('¿Estás seguro de que deseas eliminar esta propiedad? Esta acción no se puede deshacer.');
+
+    // 2. Si el usuario confirma, procede a eliminar
+    if (isConfirmed) {
+      this.propertyService.deleteProperty(this.property.id).subscribe({
+        next: () => {
+          // 3. Si tiene éxito, muestra un mensaje y redirige
+          this.alertService.set('Propiedad eliminada con éxito.');
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err: any) => {
+          // 4. Si hay un error, muéstralo
+          console.error('Error al eliminar la propiedad:', err);
+          alert('No se pudo eliminar la propiedad. Por favor, inténtalo de nuevo.');
+        }
+      });
+    }
+  }
 }

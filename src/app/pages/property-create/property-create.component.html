@@ -39,6 +39,14 @@
               {{ errorMessage }}
             </div>
 
+            <div class="mb-4">
+              <label for="image" class="form-label">Foto principal de la propiedad</label>
+              <input type="file" class="form-control" id="image" (change)="onFileSelected($event)">
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+
             <div class="d-grid">
               <button type="submit" class="btn btn-primary btn-lg" [disabled]="isLoading">
                 <span *ngIf="!isLoading">Publicar Propiedad</span>

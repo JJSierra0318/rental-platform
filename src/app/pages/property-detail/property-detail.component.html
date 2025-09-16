@@ -12,7 +12,7 @@
   <div *ngIf="property && !isLoading" class="card shadow-lg border-0">
     <div class="row g-0">
       <div class="col-lg-7">
-        <img [src]="property.imageUrl || 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg'" 
+        <img [src]="property.documents && property.documents.length > 0 ? property.documents[0].storageUrl : 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg'" 
              class="img-fluid rounded-start property-image" 
              [alt]="property.title">
       </div>
@@ -36,8 +36,8 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
               <strong>Estado:</strong>
-              <span class="badge fs-6" [ngClass]="{'bg-success': property.status === 'available', 'bg-danger': property.status !== 'available'}">
-                {{ property.status === 'available' ? 'Disponible' : 'Alquilado' }}
+              <span class="badge fs-6" [ngClass]="{'bg-success': property.status === 'AVAILABLE', 'bg-danger': property.status !== 'AVAILABLE'}">
+                {{ property.status === 'AVAILABLE' ? 'Disponible' : 'Alquilado' }}
               </span>
             </li>
           </ul>
@@ -48,10 +48,10 @@
            {{ rentalRequestError }}
           </div>
           <button class="btn btn-success btn-lg w-100" (click)="requestRental()"  
-           [disabled]="property.status !== 'available'" 
-           [ngClass]="{'btn-success': property.status === 'available', 'btn-secondary': property.status !== 'available'}">
-            <span *ngIf="property.status === 'available'">Solicitar Renta</span>
-            <span *ngIf="property.status !== 'available'">No Disponible</span>
+           [disabled]="property.status !== 'AVAILABLE'" 
+           [ngClass]="{'btn-success': property.status === 'AVAILABLE', 'btn-secondary': property.status !== 'AVAILABLE'}">
+            <span *ngIf="property.status === 'AVAILABLE'">Solicitar Renta</span>
+            <span *ngIf="property.status !== 'AVAILABLE'">No Disponible</span>
           </button>
         </div>
         <div class="card-footer bg-light p-3 mt-auto text-center">
@@ -60,6 +60,11 @@
              class="btn btn-warning btn-lg w-100">
             Editar Propiedad
           </a>
+        </div>
+        <div class="card-footer bg-light p-3 mt-auto text-center">
+          <button class="btn btn-outline-danger" (click)="deleteProperty()">
+            <i class="bi bi-trash-fill me-2"></i> Eliminar Propiedad
+          </button>
         </div>
       </div>
     </div>

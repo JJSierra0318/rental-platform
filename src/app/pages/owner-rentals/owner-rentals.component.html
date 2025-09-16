@@ -22,17 +22,22 @@
           <div class="col-md-3 text-center">
             <span class="badge fs-6" 
                   [ngClass]="{
-                    'bg-warning text-dark': rental.status === 'pending', 
-                    'bg-success': rental.status === 'accepted' || rental.status === 'approved', 
-                    'bg-danger': rental.status === 'rejected'
+                    'bg-warning text-dark': rental.status === 'PENDING', 
+                    'bg-success': rental.status === 'ACCEPTED', 
+                    'bg-danger': rental.status === 'REJECTED'
                   }">
               {{ rental.status | titlecase }}
             </span>
           </div>
-          <div class="col-md-3 text-end" *ngIf="rental.status === 'pending'">
+          <div class="col-md-3 text-end" *ngIf="rental.status === 'PENDING'">
             <button class="btn btn-success me-2" (click)="approveRental(rental.id)">Aprobar</button>
             <button class="btn btn-danger" (click)="rejectRental(rental.id)">Rechazar</button>
           </div>
+          <ng-container *ngIf="rental.status === 'ACCEPTED'">
+            <a [routerLink]="['/contract', rental.id, 'view']" class="btn btn-success btn-contract">
+              <i class="bi bi-eye-fill me-2"></i> Ver Contrato
+            </a>
+          </ng-container>
         </div>
       </div>
     </div>

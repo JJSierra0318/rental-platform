@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PropertyService } from '../../shared/services/property.service';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
+import { DocumentService } from '../../shared/services/document.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-property-create',
@@ -19,10 +21,12 @@ export class PropertyCreateComponent {
   propertyForm: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
+  selectedFile: File | null = null;
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private propertyService = inject(PropertyService);
+  private documentService = inject(DocumentService);
 
   constructor() {
     this.propertyForm = this.fb.group({
@@ -32,6 +36,13 @@ export class PropertyCreateComponent {
       city: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(1)]]
     });
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
   onSubmit() {
@@ -44,16 +55,21 @@ export class PropertyCreateComponent {
     this.errorMessage = null;
 
     this.propertyService.createProperty(this.propertyForm.value).pipe(
+      switchMap(newProperty => {
+        if (!this.selectedFile) {
+          return of(newProperty); 
+        }
+        return this.documentService.uploadPropertyPhoto(newProperty.id, this.selectedFile);
+      }),
       finalize(() => this.isLoading = false)
     ).subscribe({
-      next: (newProperty) => {
-        console.log('Propiedad creada exitosamente:', newProperty);
-        // Redirige al dashboard o a la página de detalle de la nueva propiedad
+      next: (result) => {
+        console.log('Proceso de creación y subida completado:', result);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        console.error('Error al crear la propiedad:', err);
-        this.errorMessage = 'Ocurrió un error al publicar la propiedad. Por favor, inténtalo de nuevo.';
+        console.error('Error en el proceso de creación:', err);
+        this.errorMessage = 'Ocurrió un error. Asegúrate de que todos los campos y el archivo sean correctos.';
       }
     });
   }

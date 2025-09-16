@@ -17,7 +17,7 @@
       </div>
       <p class="mb-1 text-muted">{{ rental.property.city }} - ${{ rental.property.price | number }}</p>
       <small><strong>Estado:</strong> 
-        <span class="badge" [ngClass]="{'bg-warning text-dark': rental.status === 'pending', 'bg-success': rental.status === 'approved', 'bg-danger': rental.status === 'rejected'}">
+        <span class="badge" [ngClass]="{'bg-warning text-dark': rental.status === 'PENDING', 'bg-success': rental.status === 'ACCEPTED', 'bg-danger': rental.status === 'REJECTED'}">
           {{ rental.status | titlecase }}
         </span>
       </small>
