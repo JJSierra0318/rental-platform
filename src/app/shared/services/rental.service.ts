@@ -26,7 +26,7 @@ export class RentalService {
     return this.http.get<Rental[]>(url);
   }
 
-  updateRentalStatus(id: number, status: 'accepted' | 'rejected'): Observable<Rental> {
+  updateRentalStatus(id: number, status: 'ACCEPTED' | 'REJECTED'): Observable<Rental> {
     const url = `${this.apiUrl}/${id}/status`;
     const body = { status };
     return this.http.patch<Rental>(url, body);

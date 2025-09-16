@@ -9,6 +9,7 @@ import { PropertyCreateComponent } from './pages/property-create/property-create
 import { MyRentalsComponent } from './pages/my-rentals/my-rentals.component';
 import { OwnerRentalsComponent } from './pages/owner-rentals/owner-rentals.component';
 import { PropertyEditComponent } from './pages/property-edit/property-edit.component';
+import { ContractViewerComponent } from './pages/contract-viewer/contract-viewer.component';
 
 export const routes: Routes = [
 
@@ -57,8 +58,13 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'property/:id/edit', // <-- AÑADE ESTA RUTA
+    path: 'property/:id/edit',
     component: PropertyEditComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'contract/:id/view',
+    component: ContractViewerComponent,
     canActivate: [authGuard]
   },
 ];
