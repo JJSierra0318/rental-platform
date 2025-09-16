@@ -1,27 +1,59 @@
-# RentalPlatform
+Braevon - Plataforma de Renta de Propiedades
+Descripción
+Braevon es una aplicación web de una sola página (SPA) para la renta y gestión de propiedades inmobiliarias. Construida con las últimas tecnologías de Angular, ofrece una experiencia fluida y reactiva tanto para inquilinos que buscan su próximo hogar como para dueños que desean gestionar sus propiedades y solicitudes de renta.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.20.
+Stack Tecnológico
+Este proyecto fue construido utilizando las mejores prácticas y un stack de tecnologías moderno:
 
-## Development server
+Framework: Angular 18+
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Lenguaje: TypeScript
 
-## Code scaffolding
+Estilos: SCSS y Bootstrap 5 para un diseño responsivo y consistente.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Gestión de Estado: Servicios de Angular con RxJS (BehaviorSubject) para una gestión de estado reactiva y centralizada.
 
-## Build
+Cliente HTTP: HttpClient de Angular con Interceptors para la inyección automática de tokens de autenticación.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Enrutamiento: Angular Router con Route Guards para proteger rutas.
 
-## Running unit tests
+Formularios: Reactive Forms para la gestión de formularios complejos con validaciones.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Cómo Empezar
+Siga estos pasos para ejecutar el proyecto en un entorno de desarrollo local.
 
-## Running end-to-end tests
+Prerrequisitos
+Node.js (versión 18 o superior)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Angular CLI (versión 18 o superior)
 
-## Further help
+Instalación
+Clonar el repositorio:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Bash
+
+git clone https://github.com/tu-usuario/braevon-rental-platform.git
+cd braevon-rental-platform
+Instalar las dependencias:
+
+Bash
+
+npm install
+Configurar las variables de entorno:
+
+Cree una carpeta environments dentro de src.
+
+Dentro de src/environments, cree el archivo environment.ts con el siguiente contenido, reemplazando la URL por la de su API:
+
+TypeScript
+
+export const environment = {
+  production: false,
+  apiUrl: 'URL_DE_SU_API_DE_DESARROLLO'
+};
+Ejecutar el servidor de desarrollo:
+
+Bash
+
+ng serve
+Navegue a http://localhost:4200/. La aplicación se recargará automáticamente si realiza cambios en los archivos fuente.
