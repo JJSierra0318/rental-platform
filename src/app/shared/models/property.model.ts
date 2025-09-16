@@ -19,4 +19,12 @@ export interface Property {
     id: number;
     username: string;
   };
+  documents?: PropertyDocument[]; 
+}
+
+export interface PropertyDocument {
+  id: number;
+  storageUrl: string;
+  type: 'PROPERTY_PHOTO' | string;
+  originalName: string;
 }

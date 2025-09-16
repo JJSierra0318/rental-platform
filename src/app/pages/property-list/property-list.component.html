@@ -12,8 +12,15 @@
   </div>
 
   <div *ngIf="!isLoading && !errorMessage" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    
     <div *ngFor="let prop of properties" class="col">
       <app-property-card [property]="prop"></app-property-card>
     </div>
+
+    <div *ngIf="properties.length === 0" class="col-12 text-center text-muted my-5">
+      <h4>No se encontraron propiedades</h4>
+      <p>Intenta ajustar tus filtros de búsqueda.</p>
+    </div>
+    
   </div>
 </div>

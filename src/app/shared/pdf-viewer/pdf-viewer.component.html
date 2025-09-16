@@ -1,0 +1,6 @@
+<div class="pdf-container" *ngIf="safeUrl">
+  <iframe [src]="safeUrl" frameborder="0"></iframe>
+</div>
+<div *ngIf="!safeUrl" class="text-center p-5">
+  <p class="text-muted">Cargando documento...</p>
+</div>

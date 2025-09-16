@@ -1,0 +1,47 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div *ngIf="!isLoading && !errorMessage" class="card shadow-lg border-0">
+        <div class="card-body p-4 p-md-5">
+          <h2 class="card-title text-center mb-4">Editar Propiedad</h2>
+          <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+            
+            <div class="mb-3">
+              <label for="title" class="form-label">Título del anuncio</label>
+              <input type="text" class="form-control form-control-lg" id="title" formControlName="title">
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="price" class="form-label">Precio de Renta (Mensual)</label>
+                <div class="input-group">
+                  <span class="input-group-text">$</span>
+                  <input type="number" class="form-control" id="price" formControlName="price">
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="status" class="form-label">Estado</label>
+                <select class="form-select" id="status" formControlName="status">
+                  <option value="available">Disponible</option>
+                  <option value="rented">Alquilado</option>
+                </select>
+              </div>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Guardar Cambios</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+                <span *ngIf="isLoading"> Guardando...</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="isLoading" class="text-center"><div class="spinner-border"></div></div>
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    </div>
+  </div>
+</div>

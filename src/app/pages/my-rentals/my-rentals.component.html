@@ -1,0 +1,35 @@
+<div class="container my-5">
+  <h1 class="mb-4">Mis Solicitudes de Renta</h1>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center my-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="!isLoading && rentals.length > 0" class="list-group">
+    <a *ngFor="let rental of rentals" [routerLink]="['/property', rental.propertyId]" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ rental.property.title }}</h5>
+        <small class="text-muted">{{ rental.createdAt | date:'short' }}</small>
+      </div>
+      <p class="mb-1 text-muted">{{ rental.property.city }} - ${{ rental.property.price | number }}</p>
+      <small><strong>Estado:</strong> 
+        <span class="badge" [ngClass]="{'bg-warning text-dark': rental.status === 'PENDING', 'bg-success': rental.status === 'ACCEPTED', 'bg-danger': rental.status === 'REJECTED'}">
+          {{ rental.status | titlecase }}
+        </span>
+        <button *ngIf="rental.status === 'ACCEPTED'" class="badge bg-info" (click)="createPayment()">
+          Pagar
+        </button>
+      </small>
+    </a>
+  </div>
+
+  <div *ngIf="!isLoading && rentals.length === 0" class="text-center text-muted my-5">
+    <h4>Aún no has solicitado ninguna renta</h4>
+    <p>Explora las propiedades disponibles y encuentra tu próximo hogar.</p>
+    <a routerLink="/dashboard" class="btn btn-primary">Ver Propiedades</a>
+  </div>
+</div>

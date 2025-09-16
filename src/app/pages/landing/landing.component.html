@@ -3,4 +3,8 @@
       <app-search-box (search)="performSearch($event)"></app-search-box>
     </div>
   </div>
-<app-property-list></app-property-list>
+  <app-property-list
+    [properties]="properties"
+    [isLoading]="isLoading"
+    [errorMessage]="errorMessage">
+  </app-property-list>
