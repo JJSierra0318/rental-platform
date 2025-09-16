@@ -1,13 +1,8 @@
 :host {
-  display: block; // Asegura que el componente ocupe su propio bloque de espacio
+  display: block;
 }
 
-// Opcional: Si quieres un color de fondo diferente para el menú que no sea el de Bootstrap
-// .navbar {
-//   background-color: var(--bs-primary) !important; // Por ejemplo, el color primario de Bootstrap
-// }
-
-// Opcional: Ajustar el espacio entre los botones si lo deseas
-// .d-flex .btn {
-//   margin-left: 0.5rem; // Solo un ejemplo
-// }
+.logo{
+  width: 32px;
+  height: 32px;
+}

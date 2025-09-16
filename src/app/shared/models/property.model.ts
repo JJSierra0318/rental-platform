@@ -1,13 +1,20 @@
-// src/app/shared/models/property.model.ts
+export interface PaginatedProperties {
+  page: number;
+  limit: number;
+  total: number;
+  items: Property[];
+}
 export interface Property {
   id: number;
+  ownerId: number; // Añadido
   title: string;
   description: string;
   address: string;
   city: string;
   price: number;
-  status: 'available' | 'rented'; // Definimos los posibles estados
-  imageUrl?: string; // La imagen es opcional y la añadimos aquí
+  status: 'available' | 'rented' | string;
+  createdAt: string;
+  imageUrl?: string;
   owner: {
     id: number;
     username: string;

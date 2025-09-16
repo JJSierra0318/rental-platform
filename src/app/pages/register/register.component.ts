@@ -4,6 +4,9 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
+import { AlertService } from '../../shared/services/alert.service';
+import { environment } from '../../../environments/environment';
+
 
 @Component({
   selector: 'app-register',
@@ -19,6 +22,7 @@ export class RegisterComponent {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private router = inject(Router);
+  private alertService = inject(AlertService);
 
   constructor() {
     this.registerForm = this.fb.group({
@@ -38,14 +42,15 @@ export class RegisterComponent {
     this.isLoading = true;
     this.errorMessage = null;
 
-    const endpoint = 'http://api/core-service/v1/auth/register';
+    const endpoint = `${environment.apiUrl}/auth/register`;
     const body = this.registerForm.value;
 
-    this.http.post(endpoint, body).pipe(
+    this.http.post<any>(endpoint, body).pipe(
       finalize(() => this.isLoading = false)
     ).subscribe({
       next: (response) => {
         console.log('Registro exitoso:', response);
+        this.alertService.set('Registro exitoso. Por favor, inicia sesión.');
         this.router.navigate(['/login']);
       },
       error: (err) => {

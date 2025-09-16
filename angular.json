@@ -29,14 +29,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/favicon.ico",
+              "src/assets"   
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css", // <-- AÑADE ESTA LÍNEA
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" // <-- AÑADE ESTA LÍNEA
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
           "configurations": {
@@ -53,6 +55,13 @@
                   "maximumError": "4kB"
                 }
               ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
               "outputHashing": "all"
             },
             "development": {
@@ -94,11 +103,11 @@
               }
             ],
           "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css", // <-- TAMBIÉN AQUÍ PARA LOS TESTS
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" // <-- Y AQUÍ
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           }
         }
