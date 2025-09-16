@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Property } from '../../shared/models/property.model';
 import { PropertyService } from '../../shared/services/property.service';
@@ -15,9 +15,9 @@ import { PropertyCardComponent } from '../../shared/property-card/property-card.
   styleUrls: ['./property-list.component.scss']
 })
 export class PropertyListComponent implements OnInit {
-  properties: Property[] = [];
-  isLoading = true
-  errorMessage: string | null = null;
+  @Input() properties: Property[] = [];
+  @Input() isLoading = false;
+  @Input() errorMessage: string | null = null;
   private propertyService = inject(PropertyService);
 
   ngOnInit(): void {

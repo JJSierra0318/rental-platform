@@ -28,6 +28,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public getToken(): string | null {
+    return localStorage.getItem(environment.authTokenKey);
+  }
+
   public isLoggedIn(): boolean {
     return !!localStorage.getItem(environment.authTokenKey);
   }
@@ -35,5 +39,10 @@ export class AuthService {
   private getUserFromStorage(): any {
     const user = localStorage.getItem(environment.currentUserKey);
     return user ? JSON.parse(user) : null;
+  }
+
+  public getCurrentUserId(): number | null {
+    const user = this.currentUserValue;
+    return user ? user.id : null;
   }
 }

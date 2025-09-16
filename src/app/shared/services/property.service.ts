@@ -29,4 +29,13 @@ export class PropertyService {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Property>(url);
   }
+
+  createProperty(propertyData: { title: string; description: string; address: string; city: string; price: number }): Observable<Property> {
+    return this.http.post<Property>(this.apiUrl, propertyData);
+  }
+
+  updateProperty(id: number, propertyData: any): Observable<Property> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put<Property>(url, propertyData);
+  }
 }

@@ -1,9 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Property } from '../../shared/models/property.model';
 import { PropertyService } from '../../shared/services/property.service';
 import { switchMap } from 'rxjs/operators';
+import { RentalService } from '../../shared/services/rental.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -16,9 +19,14 @@ export class PropertyDetailComponent implements OnInit {
   property: Property | null = null;
   isLoading = true;
   errorMessage: string | null = null;
+  rentalRequestError: string | null = null;
 
   private route = inject(ActivatedRoute);
   private propertyService = inject(PropertyService);
+  private rentalService = inject(RentalService);
+  authService = inject(AuthService);
+  private alertService = inject(AlertService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -40,5 +48,25 @@ export class PropertyDetailComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  requestRental() {
+    if (!this.authService.isLoggedIn()) {
+      this.alertService.set('Debes iniciar sesión para poder rentar una propiedad.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (this.property) {
+      this.rentalService.createRental(this.property.id).subscribe({
+        next: (response) => {
+          this.alertService.set('¡Tu solicitud de renta ha sido enviada con éxito!');
+          this.router.navigate(['/dashboard']);
+        },
+        error: (err) => {
+          this.rentalRequestError = 'Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.';
+        }
+      });
+    }
   }
 }

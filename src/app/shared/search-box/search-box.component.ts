@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-box',
@@ -11,12 +11,17 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 })
 export class SearchBoxComponent {
   @Output() search = new EventEmitter<any>();
-  private fb = inject(FormBuilder);
 
-  searchForm = this.fb.group({
-    type: [''],
-    query: ['']
-  });
+  private fb = inject(FormBuilder);
+  searchForm: FormGroup;
+
+  constructor() {
+    this.searchForm = this.fb.group({
+      type: [''],
+      query: ['']
+    });
+  }
+
 
   onSearch() {
     this.search.emit(this.searchForm.value);

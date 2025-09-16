@@ -44,7 +44,22 @@
         </div>
         <div class="card-footer bg-light p-3 mt-auto text-center">
           <p class="price display-5 text-primary mb-2">${{ property.price | number }}</p>
-          <button class="btn btn-success btn-lg w-100">Rentar</button>
+          <div *ngIf="rentalRequestError" class="alert alert-danger my-3">
+           {{ rentalRequestError }}
+          </div>
+          <button class="btn btn-success btn-lg w-100" (click)="requestRental()"  
+           [disabled]="property.status !== 'available'" 
+           [ngClass]="{'btn-success': property.status === 'available', 'btn-secondary': property.status !== 'available'}">
+            <span *ngIf="property.status === 'available'">Solicitar Renta</span>
+            <span *ngIf="property.status !== 'available'">No Disponible</span>
+          </button>
+        </div>
+        <div class="card-footer bg-light p-3 mt-auto text-center">
+          <a *ngIf="authService.getCurrentUserId() === property.owner.id" 
+             [routerLink]="['/property', property.id, 'edit']" 
+             class="btn btn-warning btn-lg w-100">
+            Editar Propiedad
+          </a>
         </div>
       </div>
     </div>
