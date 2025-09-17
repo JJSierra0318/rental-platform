@@ -54,14 +54,12 @@
             <span *ngIf="property.status !== 'AVAILABLE'">No Disponible</span>
           </button>
         </div>
-        <div class="card-footer bg-light p-3 mt-auto text-center">
-          <a *ngIf="authService.getCurrentUserId() === property.owner.id" 
-             [routerLink]="['/property', property.id, 'edit']" 
-             class="btn btn-warning btn-lg w-100">
-            Editar Propiedad
+        <div *ngIf="property && authService.isLoggedIn() && authService.getCurrentUserId() === property.ownerId" class="d-grid gap-2">
+          <a [routerLink]="['/property', property.id, 'edit']" 
+            class="btn btn-outline-secondary">
+            <i class="bi bi-pencil-square me-2"></i> Editar Propiedad
           </a>
-        </div>
-        <div class="card-footer bg-light p-3 mt-auto text-center">
+          
           <button class="btn btn-outline-danger" (click)="deleteProperty()">
             <i class="bi bi-trash-fill me-2"></i> Eliminar Propiedad
           </button>
